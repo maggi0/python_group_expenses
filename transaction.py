@@ -15,8 +15,6 @@ class Transaction:
         for person in self.people:
             self.expenses[person] = float(input("Podaj koszt dla " + str(person) + ": "))
 
-        print(round(sum(self.expenses.values()), 2))
-        print(round(self.cost, 2))
         if round(sum(self.expenses.values()), 2) != round(self.cost, 2):
             print("Całkowity koszt nie jest równy kosztom osób! Spróbuj jeszcze raz.")
             self.declare_costs()
