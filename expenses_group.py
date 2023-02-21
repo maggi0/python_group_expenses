@@ -52,20 +52,25 @@ class Expenses_group:
         borrowers = {k: v for k, v in balances.items() if v < 0}
         lenders = {k: v for k, v in balances.items() if v > 0}
 
-        sorted_borrowers = dict(sorted(borrowers.items(), key=lambda x: x[1], reverse=False))
-        sorted_lenders = dict(sorted(lenders.items(), key=lambda x: x[1], reverse=True))
+        sorted_borrowers = dict(
+            sorted(borrowers.items(), key=lambda x: x[1], reverse=False))
+        sorted_lenders = dict(
+            sorted(lenders.items(), key=lambda x: x[1], reverse=True))
 
         transfers = []
 
         while not (len(sorted_borrowers) == 0 or len(sorted_lenders) == 0):
             first_borrower = list(sorted_borrowers.keys())[0]
             first_lender = list(sorted_lenders.keys())[0]
-            amount = min(abs(sorted_borrowers[first_borrower]), abs(sorted_lenders[first_lender]))
+            amount = min(abs(sorted_borrowers[first_borrower]), abs(
+                sorted_lenders[first_lender]))
 
             transfers.append(Transfer(first_borrower, first_lender, amount))
 
-            sorted_borrowers.update({first_borrower: sorted_borrowers[first_borrower] + amount})
-            sorted_lenders.update({first_lender: sorted_lenders[first_lender] - amount})
+            sorted_borrowers.update(
+                {first_borrower: sorted_borrowers[first_borrower] + amount})
+            sorted_lenders.update(
+                {first_lender: sorted_lenders[first_lender] - amount})
 
             if sorted_borrowers[first_borrower] == 0.0:
                 del sorted_borrowers[list(sorted_borrowers.keys())[0]]

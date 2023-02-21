@@ -16,7 +16,8 @@ def menu():
                 expense_group = input("Wybierz grupę wydatków: ")
                 expense_groups_names = [eg.name for eg in expense_groups]
                 if expense_group in expense_groups_names:
-                    expense_group_menu(get_expense_group_by_name(expense_group))
+                    expense_group_menu(
+                        get_expense_group_by_name(expense_group))
                 else:
                     print("Nie ma takiej grupy wydatków!")
                     menu()
@@ -87,7 +88,8 @@ def add_expense_group():
     title = input("Wpisz nazwę grupy wydatków: ")
     if get_expense_group_by_name(title) != -1:
         raise Exception("Nazwa jest już zajęta!")
-    people = [person for person in input("Wpisz osoby należące do grupy oddzielone spacją: ").split()]
+    people = [person for person in input(
+        "Wpisz osoby należące do grupy oddzielone spacją: ").split()]
     exp_group = Expenses_group(title, people)
     expense_groups.append(exp_group)
 
@@ -108,7 +110,8 @@ def add_transaction(expense_group):
 
     cost = float(input("Wpisz koszt: "))
 
-    people = [person for person in input("Wpisz osoby biorące udział w transakcji oddzielone spacją: ").split()]
+    people = [person for person in input(
+        "Wpisz osoby biorące udział w transakcji oddzielone spacją: ").split()]
     for person in people:
         if person not in expense_group.people:
             print("Wpisana osoba nie należy do tej grupy wydatków!")
@@ -122,9 +125,11 @@ def add_transaction(expense_group):
         "Wpisz tak jeśli chcesz podzielić koszty po równo lub nie jeśli chcesz zadeklarować różne koszty: ")
 
     if is_split_equally == "tak":
-        expense_group.add_transaction(Transaction(name, cost, people, lender, True))
+        expense_group.add_transaction(
+            Transaction(name, cost, people, lender, True))
     elif is_split_equally == "nie":
-        expense_group.add_transaction(Transaction(name, cost, people, lender, False))
+        expense_group.add_transaction(
+            Transaction(name, cost, people, lender, False))
     else:
         print("Zła wartość!")
         expense_group_menu(expense_group)
@@ -151,7 +156,8 @@ def add_person(expense_group):
 
 if __name__ == '__main__':
     # EXAMPLE 1
-    exp_group = Expenses_group("Grupa wydatków 1", ["Alice", "Bill", "Charles"])
+    exp_group = Expenses_group(
+        "Grupa wydatków 1", ["Alice", "Bill", "Charles"])
     exp_group.add_transaction(Transaction("T1", 10, ["Bill"], "Alice", True))
     exp_group.add_transaction(Transaction("T2", 1, ["Alice"], "Bill", True))
     exp_group.add_transaction(Transaction("T3", 5, ["Charles"], "Bill", True))
@@ -159,10 +165,14 @@ if __name__ == '__main__':
     expense_groups.append(exp_group)
 
     # EXAMPLE 2
-    exp_group2 = Expenses_group("Grupa wydatków 2", ["Agata", "Hubert", "Bartek"])
-    exp_group2.add_transaction(Transaction("T1", 13.24, ["Bartek", "Agata", "Hubert"], "Hubert", True))
-    exp_group2.add_transaction(Transaction("T2", 15.23, ["Bartek", "Agata"], "Agata", True))
-    exp_group2.add_transaction(Transaction("T3", 123.42, ["Agata", "Hubert", "Bartek"], "Bartek", True))
+    exp_group2 = Expenses_group(
+        "Grupa wydatków 2", ["Agata", "Hubert", "Bartek"])
+    exp_group2.add_transaction(Transaction(
+        "T1", 13.24, ["Bartek", "Agata", "Hubert"], "Hubert", True))
+    exp_group2.add_transaction(Transaction(
+        "T2", 15.23, ["Bartek", "Agata"], "Agata", True))
+    exp_group2.add_transaction(Transaction(
+        "T3", 123.42, ["Agata", "Hubert", "Bartek"], "Bartek", True))
     expense_groups.append(exp_group2)
 
     # MENU

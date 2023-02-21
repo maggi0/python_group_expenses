@@ -5,4 +5,5 @@ class Transfer:
         self.amount = amount
 
     def print_transfer(self):
-        print("{} przelewa {:.2f}$ dla {}".format(self.borrower, float(self.amount), self.lender))
+        print("{} przelewa {:.2f}$ dla {}".format(
+            self.borrower, float(self.amount), self.lender))
